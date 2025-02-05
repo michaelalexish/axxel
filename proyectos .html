@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Particles with Menu and Sections</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: auto;
+            background: #000;
+            min-height: 100vh;
+        }
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #particles-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #top-menu {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        #top-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+
+        #top-menu a:hover {
+            background: #00ccff;
+            box-shadow: 0 0 15px #00ccff;
+            transform: scale(1.2);
+        }
+
+        #top-menu i {
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        #social-icons {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        #social-icons a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #001f3f 0%, #001233 70%, #000814 100%);
+            border: 2px solid rgba(0, 136, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+        }
+
+        #social-icons a:hover {
+            transform: scale(1.2);
+            border: 2px solid rgba(0, 255, 255, 0.8);
+            box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+
+        #social-icons i {
+            color: #00ccff;
+            font-size: 22px;
+            text-shadow: 0 0 15px rgba(0, 204, 255, 0.9);
+        }
+
+        #wallet-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            width: 70%;
+            margin: 100px auto;
+            border-radius: 15px;
+            
+            z-index: 10;
+        }
+
+        #wallet-section .content {
+            max-width: 50%;
+            padding-right: 20px;
+        }
+
+        #wallet-section .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ccff;
+        }
+
+        #wallet-section .content p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        #wallet-section .image {
+            max-width: 45%;
+        }
+
+        #wallet-section .image img {
+            width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    html {
+            height: 100%;
+            overflow-y: auto;
+        }
+        </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="particles-background"></div>
+
+    <div id="top-menu">
+        <a href="#inicio"><i class="fas fa-home"></i></a>
+        <a href="#acerca-de"><i class="fas fa-info-circle"></i></a>
+        <a href="#tokenomics"><i class="fas fa-chart-pie"></i></a>
+        <a href="#roadmap"><i class="fas fa-road"></i></a>
+        <a href="#proyectos"><i class="fas fa-project-diagram"></i></a>
+        <a href="#galeria"><i class="fas fa-images"></i></a>
+        
+        
+    </div>
+
+    <div id="social-icons">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <section id="projects-section" style="z-index: 2; position: relative; padding: 50px 0; background: rgba(0, 0, 0, 0.7); color: white; text-align: center; width: 80%; margin: 50px auto;">
+        <h2 style="font-size: 2em; margin-bottom: 20px; text-shadow: 0 0 10px #00ccff;">Nuestros Proyectos</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-wallet" style="font-size: 35px; color: #00ccff; margin-bottom: 10px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Crear una Billetera</h3>
+    <a href="#wallet-section" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-wallet" style="font-size: 50px; color: #00ccff; margin-bottom: 15px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Crear una Swap</h3>
+    <a href="#swap-section" style="display: inline-block; margin-top: 10px; padding: 8px 15px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-gamepad" style="font-size: 35px; color: #00ccff; margin-bottom: 10px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Crear una Plataforma de Gaming</h3>
+    <a href="#gaming-platform-section" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-vr-cardboard" style="font-size: 35px; color: #00ccff; margin-bottom: 10px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Videojuegos Competitivos</h3>
+    <a href="#competitive-games-section" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-brain" style="font-size: 35px; color: #00ccff; margin-bottom: 10px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Innovar con RV y AI</h3>
+    <a href="#innovation-section" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+            <div style="width: 150px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 31, 63, 0.9); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); margin: 10px; text-align: center;">
+    <i class="fas fa-lightbulb" style="font-size: 35px; color: #00ccff; margin-bottom: 10px;"></i>
+    <h3 style="color: #fff; margin-bottom: 15px;">Invertir en RV y AI</h3>
+    <a href="#investment-section" style="display: inline-block; margin-top: 10px; padding: 6px 12px; background: #00ccff; color: white; border-radius: 5px; text-decoration: none; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s, transform 0.3s;">Más</a>
+</div>
+        </div>
+    </section>
+
+    <section id="wallet-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content">
+            <h2>La Billetera del Ecosistema</h2>
+            <p>
+                Nuestra billetera está diseñada para ser segura, eficiente y fácil de usar. No cobramos comisiones por transacciones realizadas dentro del ecosistema o en los videojuegos asociados. Es la herramienta perfecta para gestionar tus activos digitales mientras disfrutas de una experiencia sin fricciones.
+            </p>
+        </div>
+        <div class="image">
+            <img src="https://i.ibb.co/rdLpdMK/Background-Eraser-20250126-164358562.png" alt="Wallet Illustration" style="width: 100%; border-radius: 0; box-shadow: none;">
+        </div>
+    </section>
+
+    <section id="swap-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content" style="animation: fadeIn 2s ease-in-out;">
+            <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff; animation: slideInLeft 1s ease-in-out;">Bienvenido a nuestra Plataforma Swap</h2>
+            <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px; animation: slideInRight 1s ease-in-out;">
+                Explora la manera más eficiente y segura de intercambiar tus criptomonedas favoritas. Nuestra plataforma Swap está diseñada para ser intuitiva, sin comisiones ocultas y completamente integrada dentro del ecosistema, facilitando transacciones rápidas y confiables.
+            </p>
+        </div>
+        <div class="image">
+            <div style="width: 100%; height: auto; padding: 20px; background: rgba(0, 0, 0, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);">
+                <form id="swap-form" style="display: flex; flex-direction: column; gap: 15px;">
+                    <label for="from-crypto" style="color: #00ccff;">De:</label>
+                    <select id="from-crypto" style="padding: 10px; border-radius: 5px; border: 1px solid #00ccff;">
+                        <option value="BTC">Bitcoin (BTC)</option>
+                        <option value="ETH">Ethereum (ETH)</option>
+                        <option value="AXL">AXXEL (AXL)</option>
+                    </select>
+
+                    <label for="to-crypto" style="color: #00ccff;">A:</label>
+                    <select id="to-crypto" style="padding: 10px; border-radius: 5px; border: 1px solid #00ccff;">
+                        <option value="BTC">Bitcoin (BTC)</option>
+                        <option value="ETH">Ethereum (ETH)</option>
+                        <option value="AXL">AXXEL (AXL)</option>
+                    </select>
+
+                    <label for="amount" style="color: #00ccff;">Cantidad:</label>
+                    <input type="number" id="amount" placeholder="0.0" style="padding: 10px; border-radius: 5px; border: 1px solid #00ccff;" required>
+
+                    <button type="button" style="padding: 10px; background: #00ccff; color: white; border: none; border-radius: 5px; cursor: pointer; box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); transition: background 0.3s;">
+                        Intercambiar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="gaming-platform-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content" style="animation: fadeIn 2s ease-in-out;">
+            <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff; animation: slideInLeft 1s ease-in-out;">Plataforma de Gaming</h2>
+            <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px; animation: slideInRight 1s ease-in-out;">
+                Nuestra plataforma de gaming está diseñada para revolucionar la experiencia de los jugadores. Ofrecemos un ecosistema donde la diversión, la competencia y las recompensas se fusionan. Aquí, cada partida cuenta y cada jugador tiene la oportunidad de ser recompensado por sus habilidades, asegurando que tu tiempo invertido sea valioso y memorable.
+            </p>
+        </div>
+        <div class="image">
+            <img src="https://i.ibb.co/92C43RN/Background-Eraser-20250127-224450098.png" alt="Gaming Platform Illustration" style="width: 100%; border-radius: 0; box-shadow: none;">
+        </div>
+        </div>
+    </section>
+
+    <section id="competitive-games-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content" style="animation: fadeIn 2s ease-in-out;">
+            <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff; animation: slideInLeft 1s ease-in-out;">Videojuegos Competitivos</h2>
+            <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px; animation: slideInRight 1s ease-in-out;">
+                Descubre una experiencia completamente nueva con videojuegos diseñados para integrar nuestra billetera y plataforma Swap. Participa en torneos emocionantes y gana recompensas en un entorno justo, competitivo y lleno de adrenalina.
+            </p>
+        </div>
+        <div class="image">
+            <img src="https://i.ibb.co/8sPX9nc/Background-Eraser-20250122-094451642.png"  style="width: 100%; border-radius: 10px; ">
+        </div>
+            
+        </div>
+    </section>
+
+    <section id="innovation-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content" style="width: 50%; animation: fadeIn 2s ease-in-out;">
+            <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff; animation: slideInLeft 1.5s ease-in-out;">Innovación con RV y AI</h2>
+            <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px; animation: slideInRight 1.5s ease-in-out;">
+                Estamos a la vanguardia de la revolución tecnológica, integrando realidad virtual e inteligencia artificial para transformar la experiencia de los usuarios. Nuestro enfoque es crear herramientas inmersivas y soluciones innovadoras que impulsen el entretenimiento, la educación y la productividad, redefiniendo los límites de lo posible.
+            </p>
+        </div>
+        <div class="image" style="width: 40%; text-align: center;">
+            <img src="https://i.ibb.co/k4K7bch/Background-Eraser-20250128-003225288.png" alt="Innovation Illustration" style="width: 100%; border-radius: 15px;">
+        </div>
+    </section>
+
+    <section id="investment-section" style="display: flex; align-items: center; justify-content: space-between; padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 50px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10;">
+        <div class="content" style="animation: fadeIn 2s ease-in-out;">
+            <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff; animation: slideInLeft 1.5s ease-in-out;">Inversión en RV y AI</h2>
+            <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px; animation: slideInRight 1.5s ease-in-out;">
+                Estamos revolucionando el panorama tecnológico al invertir en proyectos que integran realidad virtual e inteligencia artificial. Nuestro compromiso es con la innovación que transforma industrias y mejora vidas, impulsando un ecosistema sostenible y conectado al futuro.
+            </p>
+        </div>
+        <div class="image">
+            <img src="https://i.ibb.co/jDyDmr9/Background-Eraser-20250127-230318240.png" alt="Investment Illustration" style="width: 100%; border-radius: 0;">
+        </div>
+    </section>
+
+    <script>
+        const section = document.querySelector("#particles-background"),
+            scene = new THREE.Scene(),
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        section.appendChild(renderer.domElement);
+
+        const particleGeometry = new THREE.BufferGeometry(),
+            particleCount = 2000,
+            particlePositions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            particlePositions[i] = (Math.random() - 0.5) * 200; // X
+            particlePositions[i + 1] = Math.random() * 200 - 100; // Y
+            particlePositions[i + 2] = (Math.random() - 0.5) * 200; // Z
+        }
+
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ffff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particles);
+
+        camera.position.z = 100;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const positions = particleGeometry.attributes.position.array;
+            for (let i = 1; i < particleCount * 3; i += 3) {
+                positions[i] -= 0.5; // Move down
+                if (positions[i] < -100) {
+                    positions[i] = 100; // Reset to top
+                }
+            }
+
+            particleGeometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+<footer style="background: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px 0; text-align: center; margin-top: 50px; border-top: 2px solid #00ccff;">
+        <p style="font-size: 1.1em; margin: 0; animation: fadeIn 2s ease-in-out;">
+            &copy; 2025 AXXEL Ecosystem. All Rights Reserved. | 
+            <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Privacy Policy</a> | 
+            <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Terms of Service</a> | 
+            <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Contact Us</a>
+        </p>
+    </footer>
+</body>
+</html>
