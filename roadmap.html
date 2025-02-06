@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROADMAP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+    }
+
+    #roadmap-3d-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Las partículas están detrás del contenido */
+    }
+
+    #background-gif {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+      width: 100%;
+      max-width: 800px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    #social-icons {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    #social-icons a {
+      display: block;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #001f3f 0%, #001233 70%, #000814 100%);
+      border: 2px solid rgba(0, 136, 255, 0.5);
+      border-radius: 50%;
+      box-shadow: inset 0px 0px 10px rgba(0, 255, 255, 0.5), 0px 0px 20px rgba(0, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.3s, border 0.3s;
+    }
+
+    #social-icons a:hover {
+      transform: scale(1.2);
+      border: 2px solid rgba(0, 255, 255, 0.8);
+      box-shadow: inset 0px 0px 15px rgba(0, 255, 255, 0.7), 0px 0px 30px rgba(0, 255, 255, 0.7);
+    }
+
+    #social-icons i {
+      color: #00ccff;
+      font-size: 26px;
+      text-shadow: 0px 0px 15px rgba(0, 204, 255, 0.9);
+    }
+
+    #main-menu {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+      z-index: 10;
+    }
+
+    #main-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+
+    #main-menu li {
+      display: inline;
+    }
+
+    #main-menu a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    #main-menu a:hover {
+      background: #00ccff;
+      box-shadow: 0 0 15px #00ccff;
+      transform: scale(1.2);
+    }
+
+    #main-menu i {
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    #roadmap-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%; /* Ajuste solicitado */
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 5;
+    }
+
+    .roadmap-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .roadmap-item {
+      width: 200px;
+      text-align: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .roadmap-item .circle {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #0dcaf0, #146c96);
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 4px 10px rgba(13, 202, 240, 0.6);
+      animation: pulseGlow 2s infinite;
+    }
+
+    .roadmap-item .content {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .roadmap-item:hover .content {
+      transform: scale(1.1);
+      background: rgba(13, 202, 240, 0.2);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(13, 202, 240, 0.8), 0 0 20px rgba(13, 202, 240, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(13, 202, 240, 1), 0 0 30px rgba(13, 202, 240, 0.7);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #roadmap-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .roadmap-item {
+        width: 100%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <nav id="main-menu">
+    <ul>
+      <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+      <li><a href="#"><i class="fas fa-home"></i></a></li>
+      <li><a href="#"><i class="fas fa-info-circle"></i></a></li>
+      <li><a href="tokenimics.html"><i class="fas fa-chart-pie"></i></a></li>
+      <li><a href="#"><i class="fas fa-road"></i></a></li>
+      <li><a href="#"><i class="fas fa-project-diagram"></i></a></li>
+      <li><a href="#"><i class="fas fa-question-circle"></i></a></li>
+    </ul>
+  </nav>
+
+  <section id="roadmap-3d-section">
+    <div id="social-icons">
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div id="particles-container"></div>
+    <img id="background-gif" src="https://i.ibb.co/5kL8RB4/GIF-20250121-200245-662.gif" alt="Background Animation">
+
+    <div id="roadmap-container">
+      <div class="roadmap-column">
+        <div class="roadmap-item">
+          <div class="circle">Q1</div>
+          <div class="content">
+            <h4>Etapa 1</h4>
+            <p>Construcción de comunidad en redes sociales, creación del token AXXEL en Binance Smart Chain.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="circle">Q2</div>
+          <div class="content">
+            <h4>Etapa 2</h4>
+            <p>Lanzamiento de ICO/IDO, desarrollo del primer juego competitivo básico.</p>
+          </div>
+        </div>
+      </div>
+      <div class="roadmap-column">
+        <div class="roadmap-item">
+          <div class="circle">Q3</div>
+          <div class="content">
+            <h4>Etapa 3</h4>
+            <p>Expansión del Ecosistema: lanzamiento oficial de la plataforma de juegos.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="circle">Q4</div>
+          <div class="content">
+            <h4>Etapa 4</h4>
+            <p>Innovación y globalización: desarrollo de experiencias inmersivas con realidad virtual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const section = document.querySelector('#roadmap-3d-section');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, section.clientWidth / section.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(section.clientWidth, section.clientHeight);
+      document.getElementById('particles-container').appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 2, 50);
+      pointLight.position.set(10, 10, 10);
+      scene.add(pointLight);
+
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 500;
+      const particlePositions = [];
+      for (let i = 0; i < particleCount; i++) {
+        particlePositions.push(
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20
+        );
+      }
+      particleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(particlePositions, 3));
+      const particleMaterial = new THREE.PointsMaterial({
+        color: 0x00ffff,
+        size: 0.1,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      camera.position.z = 15;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.001;
+        particles.rotation.x += 0.0005;
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      window.addEventListener('resize', () => {
+        renderer.setSize(section.clientWidth, section.clientHeight);
+        camera.aspect = section.clientWidth / section.clientHeight;
+        camera.updateProjectionMatrix();
+      });
+    </script>
+  </section>
+</body>
+</html>

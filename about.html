@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: auto;
+            background: #000;
+            min-height: 100vh;
+        }
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #particles-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #top-menu {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        #top-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+
+        #top-menu a:hover {
+            background: #00ccff;
+            box-shadow: 0 0 15px #00ccff;
+            transform: scale(1.2);
+        }
+
+        #top-menu i {
+            font-size: 20px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        #social-icons {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        #social-icons a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #001f3f 0%, #001233 70%, #000814 100%);
+            border: 2px solid rgba(0, 136, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+        }
+
+        #social-icons a:hover {
+            transform: scale(1.2);
+            border: 2px solid rgba(0, 255, 255, 0.8);
+            box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+
+        #social-icons i {
+            color: #00ccff;
+            font-size: 22px;
+            text-shadow: 0 0 15px rgba(0, 204, 255, 0.9);
+        }
+
+        #wallet-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            width: 70%;
+            margin: 100px auto;
+            border-radius: 15px;
+            
+            z-index: 10;
+        }
+
+        #wallet-section .content {
+            max-width: 50%;
+            padding-right: 20px;
+        }
+
+        #wallet-section .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ccff;
+        }
+
+        #wallet-section .content p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        #wallet-section .image {
+            max-width: 45%;
+        }
+
+        #wallet-section .image img {
+            width: 100%;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    html {
+            height: 100%;
+            overflow-y: auto;
+        }
+        </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="particles-background"></div>
+
+    <div id="top-menu">
+        <a href="#inicio"><i class="fas fa-home"></i></a>
+        <a href="#acerca-de"><i class="fas fa-info-circle"></i></a>
+        <a href="#tokenomics"><i class="fas fa-chart-pie"></i></a>
+        <a href="#roadmap"><i class="fas fa-road"></i></a>
+        <a href="#proyectos"><i class="fas fa-project-diagram"></i></a>
+        <a href="#galeria"><i class="fas fa-images"></i></a>
+        
+        
+    </div>
+
+    <div id="social-icons">
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <script>
+        const section = document.querySelector("#particles-background"),
+            scene = new THREE.Scene(),
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        section.appendChild(renderer.domElement);
+
+        const particleGeometry = new THREE.BufferGeometry(),
+            particleCount = 2000,
+            particlePositions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            particlePositions[i] = (Math.random() - 0.5) * 200; // X
+            particlePositions[i + 1] = Math.random() * 200 - 100; // Y
+            particlePositions[i + 2] = (Math.random() - 0.5) * 200; // Z
+        }
+
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ffff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particles);
+
+        camera.position.z = 100;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const positions = particleGeometry.attributes.position.array;
+            for (let i = 1; i < particleCount * 3; i += 3) {
+                positions[i] -= 0.5; // Move down
+                if (positions[i] < -100) {
+                    positions[i] = 100; // Reset to top
+                }
+            }
+
+            particleGeometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+<section id="pitch-section" style="padding: 50px; background: rgba(0, 0, 0, 0.7); color: #fff; width: 70%; margin: 100px auto; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); z-index: 10; text-align: center;">
+        <h2 style="font-size: 2.5em; text-shadow: 0 0 10px #00ccff;">🚀 AXXEL: El Ecosistema del Futuro en Gaming, Blockchain y DeFi</h2>
+        <p style="line-height: 1.6; font-size: 1.2em; margin-top: 15px;">
+            AXXEL no es solo una memecoin, es el epicentro de un ecosistema futurista que fusiona gaming competitivo, blockchain, NFTs y finanzas descentralizadas (DeFi). Con un modelo autosostenible, AXXEL redefine la forma en que los jugadores, inversores y desarrolladores interactúan con la tecnología y las inversiones digitales.
+        </p>
+        <p><strong>🌍 Nuestra misión:</strong> Construir un ecosistema sostenible donde la diversión y la rentabilidad vayan de la mano, ofreciendo oportunidades para jugar, invertir y obtener recompensas sin afectar la estabilidad del token.</p>
+        <p><strong>⚡ Nuestra visión:</strong> Convertir a AXXEL en el pilar del entretenimiento digital y la economía descentralizada, empoderando a nuestra comunidad con herramientas innovadoras y un sistema económico sólido.</p>
+        <p><strong>🛡️ Nuestro enfoque:</strong> Un modelo de negocio diseñado para atraer y retener inversores, evitando la inflación descontrolada del token y garantizando un crecimiento predecible y sostenible.</p>
+        <h3>🎯 Problema que Resolvemos</h3>
+        <p>El mercado está lleno de memecoins sin propósito real, cuyo valor depende solo de la especulación. Esto genera volatilidad extrema, pérdida de confianza y comunidades sin dirección.</p>
+        <h3>🔥 AXXEL soluciona esto con un enfoque estratégico:</h3>
+        <ul style="list-style: none; padding: 0; font-size: 1.2em;">
+            <li>✅ Un ecosistema con utilidad real en gaming, NFTs y DeFi.</li>
+            <li>✅ Un plan de tokenomics anti-dumping que protege el precio del token.</li>
+            <li>✅ Un sistema de recompensas sostenible que incentiva la adopción sin saturar el mercado.</li>
+        </ul>
+        <h3>💰 Modelo de Ingresos de AXXEL</h3>
+        <p>AXXEL generará ingresos a través de diversas fuentes para garantizar estabilidad financiera y reinversión en el ecosistema:</p>
+        <ul style="list-style: none; padding: 0; font-size: 1.2em;">
+            <li>1️⃣ <strong>Gaming Competitivo 🎮</strong><br> Torneos donde los jugadores apuestan AXXEL y los ganadores reciben premios. Venta de skins, pases premium y NFT exclusivos dentro de los juegos.</li>
+            <li>2️⃣ <strong>NFTs & Marketplace 💎</strong><br> Venta de NFTs raros y coleccionables exclusivos. Tarifas en transacciones de compra/venta de NFTs en el marketplace AXXEL.</li>
+            <li>3️⃣ <strong>Staking & Swap 💰</strong><br> Comisiones en el AXXEL Swap y tarifas en el sistema de staking.</li>
+            <li>4️⃣ <strong>Asociaciones & Alianzas 🤝</strong><br> Integración de AXXEL con empresas de blockchain y gaming. Publicidad y patrocinio de torneos y eventos exclusivos.</li>
+        </ul>
+        <p><strong>🌟 Conclusión:</strong> AXXEL no depende solo de la especulación del mercado. Hemos construido un ecosistema que genera valor constante y autosostenible, combinando gaming, NFTs, DeFi e innovación blockchain.</p>
+        <p style="font-size: 1.3em; font-weight: bold; margin-top: 15px; text-shadow: 0 0 10px #00ccff;">💡 ¿Quién dijo que un chiste no se puede convertir en realidad? 😏</p>
+        <p style="font-size: 1.5em; font-weight: bold; color: #00ccff; margin-top: 20px;">🔗 Únete al futuro con AXXEL. 🚀</p>
+    </section>
+
+<footer style="background: rgba(0, 0, 0, 0.7); color: #fff; padding: 20px 0; text-align: center; border-top: 2px solid #00ccff; position: relative; bottom: 0; width: 100%;">
+    <p style="font-size: 1.1em; margin: 0; animation: fadeIn 2s ease-in-out;">
+        &copy; 2025 AXXEL Ecosystem. All Rights Reserved. | 
+        <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Privacy Policy</a> | 
+        <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Terms of Service</a> | 
+        <a href="#" style="color: #00ccff; text-decoration: none; font-size: 1.1em; transition: color 0.3s;">Contact Us</a>
+    </p>
+</footer>
+</body>
+</html>
